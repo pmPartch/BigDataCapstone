@@ -28,6 +28,8 @@ support.
 We recommend workng in your home directory (type cd ~ in your terminal). Please run any
 scripts using your terminal for proper settings.
 
+__Note: this document has been written using R (with Knitr) as an example and verification of the techniques used in the class. I'm going to be using lubridate and ggplot2 libraries for generating this document.__
+
 ## Step 1: Attribute Selection
 
 ### Import Data
@@ -106,7 +108,7 @@ inclination to click on ads. The following command selects 'userid' and 'adCount
 other columns that we do not want to use at this stage.
 ```{r}
 useradClicks <- subset(ad_clicks,select=c("userId","adCount"))
-head(useradClicks)
+head(useradClicks,5)
 
 ```
 
@@ -136,7 +138,7 @@ when creating features.
 revenuePerUser  <- aggregate(userPurchases$price,by=list(userId=userPurchases$userId),FUN=sum)
 names(revenuePerUser) <- c("userId","revenue")
 
-head(revenuePerUser)
+head(revenuePerUser,5)
 
 ```
 ### Merge the two tables
@@ -199,8 +201,8 @@ ggplot(trainingDF, aes(totalAdClicks, revenue, color = model$cluster)) + geom_po
 ##Step 4: Recommend Actions
 ####Analyze the cluster centers
 Each array denotes the center for a cluster:  
-One Cluster is centered at ... array([ 29.43211679, 24.21021898])  
-Other Cluster is centered at ... array([ 42.05442177, 113.02040816])
+One Cluster is centered at ... array([ 27.39467849,  23.86474501])  
+Other Cluster is centered at ... array([ 39.07608696,  115.26086957])
 
 First number (field1) in each array refers to number of adclicks and the second number (field2) is the revenue per user. Compare the 1st number of each cluster to see how differently users in each cluster behave when it comes to clicking ads. Compare the 2nd number of each cluster to see how differently users in each cluster behave when it comes to buying stuff.
 

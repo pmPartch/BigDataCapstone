@@ -131,6 +131,7 @@ setupWeek3.sh</p></li>
 <li><p>Note that your dataset may be different from what is used here, so your results may not match with those shown here</p></li>
 </ul>
 <p>Finally, make sure that your working directory contains the data files (.csv) for the fastest support. We recommend workng in your home directory (type cd ~ in your terminal). Please run any scripts using your terminal for proper settings.</p>
+<p><strong>Note: this document has been written using R (with Knitr) as an example and verification of the techniques used in the class. I’m going to be using lubridate and ggplot2 libraries for generating this document.</strong></p>
 <div id="step-1-attribute-selection" class="section level2">
 <h2>Step 1: Attribute Selection</h2>
 <div id="import-data" class="section level3">
@@ -200,14 +201,13 @@ head(userPurchases,5)</code></pre>
 ## 5   2222    20</code></pre>
 <p>Similarly, from the adclicksDF, we will use the ‘adCount’ as an attribute that captures user’s inclination to click on ads. The following command selects ‘userid’ and ‘adCount’ and drops all other columns that we do not want to use at this stage.</p>
 <pre class="r"><code>useradClicks &lt;- subset(ad_clicks,select=c(&quot;userId&quot;,&quot;adCount&quot;))
-head(useradClicks)</code></pre>
+head(useradClicks,5)</code></pre>
 <pre><code>##   userId adCount
 ## 1    611       1
 ## 2   1874       1
 ## 3   2139       1
 ## 4    212       1
-## 5   1027       1
-## 6    595       1</code></pre>
+## 5   1027       1</code></pre>
 </div>
 </div>
 <div id="step-2-training-data-set-creation" class="section level2">
@@ -233,14 +233,13 @@ names(adsPerUser) &lt;- c(&quot;userId&quot;,&quot;totalAdClicks&quot;)</code></
 <pre class="r"><code>revenuePerUser  &lt;- aggregate(userPurchases$price,by=list(userId=userPurchases$userId),FUN=sum)
 names(revenuePerUser) &lt;- c(&quot;userId&quot;,&quot;revenue&quot;)
 
-head(revenuePerUser)</code></pre>
+head(revenuePerUser,5)</code></pre>
 <pre><code>##   userId revenue
 ## 1      1      21
 ## 2      8      53
 ## 3      9      80
 ## 4     10      11
-## 5     12     215
-## 6     13      20</code></pre>
+## 5     12     215</code></pre>
 </div>
 <div id="merge-the-two-tables" class="section level3">
 <h3>Merge the two tables</h3>
@@ -307,8 +306,8 @@ ggplot(trainingDF, aes(totalAdClicks, revenue, color = model$cluster)) + geom_po
 <div id="analyze-the-cluster-centers" class="section level4">
 <h4>Analyze the cluster centers</h4>
 <p>Each array denotes the center for a cluster:<br />
-One Cluster is centered at … array([ 29.43211679, 24.21021898])<br />
-Other Cluster is centered at … array([ 42.05442177, 113.02040816])</p>
+One Cluster is centered at … array([ 27.39467849, 23.86474501])<br />
+Other Cluster is centered at … array([ 39.07608696, 115.26086957])</p>
 <p>First number (field1) in each array refers to number of adclicks and the second number (field2) is the revenue per user. Compare the 1st number of each cluster to see how differently users in each cluster behave when it comes to clicking ads. Compare the 2nd number of each cluster to see how differently users in each cluster behave when it comes to buying stuff.</p>
 <p>In one cluster, in general, players click on ads much more often (~1.4 times) and spend more money (~4.7 times) on inapp purchases. Assuming that Eglence Inc. gets paid for showing ads and for hosting inapp purchase items, we can use this information to increase game’s revenue by increasing the prices for ads we show to the frequentclickers, and charge higher fees for hosting the inapp purchase items shown to the higher revenue generating buyers.</p>
 <p><strong>Note:</strong> This analysis requires you to compare the cluster centers and find any ‘significant’differences in the corresponding feature values of the centers. The answer to this question will depend on the features you have chosen.</p>
