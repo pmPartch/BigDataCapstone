@@ -1,6 +1,6 @@
 # Big Data Capstone
 
-Some R scripts for the UCSD Big Data Capstone project
+Some R scripts for the UCSD Big Data (2015) Capstone project
 
 * week1.R - is the week 1 data exploration done using the R language. Note that the csv files are expected to reside within the working directory of the R script
 
