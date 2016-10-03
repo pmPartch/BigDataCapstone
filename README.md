@@ -11,3 +11,5 @@ Some R scripts for the UCSD Big Data (2015) Capstone project
 * Week3_BigData_Capstone.html - HTML output from Knitr of .Rmd file above.
 
 * Week3_BigData_Capstone.pdf - PDF output from Knitr of .Rmd file above.
+
+* data CSV files (only because it is more convenient for me when working off the repository from different computers)
